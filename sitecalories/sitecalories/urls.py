@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from mainmenu.views import index
+from mainmenu.views import index, about, product, func_of_viewproduct
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mainmenu/', index)
-]
+    path('', index),
+    path('about/', about),
+    path('product/', product),
+    path('product/<int:product_id>', func_of_viewproduct)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
